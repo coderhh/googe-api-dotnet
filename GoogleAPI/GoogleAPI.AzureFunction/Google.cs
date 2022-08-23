@@ -14,10 +14,14 @@ namespace GoogleAPI.AzureFunction
 
     public static class Google
     {
-        private static readonly string GoogleApiKey = System.Environment.GetEnvironmentVariable("GOOGLEAPIKEY");
+        private static readonly string GoogleApiKey = System.Environment.GetEnvironmentVariable("GOOGLE_API_KEY");
         [FunctionName("Google")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, [Queue("outqueue"), StorageAccount("AzureWebJobsStorage")] ICollector<string> msg,
+            [CosmosDB(
+                databaseName: "googleapi",
+                collectionName: "googleapi",
+                ConnectionStringSetting = "CosmosDbConnectionString")]IAsyncCollector<dynamic> documentsOut,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -31,6 +35,12 @@ namespace GoogleAPI.AzureFunction
             if (!string.IsNullOrEmpty(name))
             {
                 msg.Add(name);
+                await documentsOut.AddAsync(new
+                {
+                    // create a random ID
+                    id = System.Guid.NewGuid().ToString(),
+                    name = name
+                });
             }
 
             var service = new DiscoveryService(new BaseClientService.Initializer
@@ -41,10 +51,20 @@ namespace GoogleAPI.AzureFunction
 
             var result = await service.Apis.List().ExecuteAsync();
 
+            if (result != null)
+            {
+                await documentsOut.AddAsync(new
+                {
+                    // create a random ID
+                    id = System.Guid.NewGuid().ToString(),
+                    Apis = result.Items.ToList()
+                });
+            }
+            
 
-            return name != null
+            return result != null
                 ? (ActionResult)new OkObjectResult(result.Items.Select(x => x.Name))
-                : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
+                : new BadRequestObjectResult("Unable to get api list from google");
         }
     }
 }
