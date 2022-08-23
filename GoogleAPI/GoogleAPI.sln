@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleAPI.Console", "GoogleAPI.Console\GoogleAPI.Console.csproj", "{6F077D76-935C-4EB5-8B4A-2E52FBCA724E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleAPI.AzureFunction", "GoogleAPI.AzureFunction\GoogleAPI.AzureFunction.csproj", "{8B1A4696-9E0B-4232-B2FF-7E7CD513C21C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F077D76-935C-4EB5-8B4A-2E52FBCA724E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F077D76-935C-4EB5-8B4A-2E52FBCA724E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F077D76-935C-4EB5-8B4A-2E52FBCA724E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F077D76-935C-4EB5-8B4A-2E52FBCA724E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B1A4696-9E0B-4232-B2FF-7E7CD513C21C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B1A4696-9E0B-4232-B2FF-7E7CD513C21C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B1A4696-9E0B-4232-B2FF-7E7CD513C21C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B1A4696-9E0B-4232-B2FF-7E7CD513C21C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {592AE9EC-2740-4E92-8F9D-50CF8FEDA8E5}
+	EndGlobalSection
+EndGlobal
